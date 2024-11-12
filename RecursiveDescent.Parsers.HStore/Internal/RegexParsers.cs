@@ -1,42 +1,72 @@
-﻿namespace RecursiveDescent.Parsers.HStore {
+﻿using System.Text.RegularExpressions;
 
-    internal sealed class CurlyOpenParser() : RegexParser<CurlyOpenNode>(@"{") {
+namespace RecursiveDescent.Parsers.HStore {
+
+    internal sealed partial class CurlyOpenParser() : RegexParser<CurlyOpenNode>(GetGeneratedRegex()) {
+
+        [GeneratedRegex(@"{", RegexOptions.IgnoreCase)]
+        private static partial Regex GetGeneratedRegex();
+
         protected override CurlyOpenNode CreateNode(string Value) {
             return new CurlyOpenNode() { Value = Value, };
         }
     }
 
-    internal sealed class CurlyCloseParser() : RegexParser<CurlyCloseNode>(@"}") {
+    internal sealed partial class CurlyCloseParser() : RegexParser<CurlyCloseNode>(GetGeneratedRegex()) {
+
+        [GeneratedRegex(@"}", RegexOptions.IgnoreCase)]
+        private static partial Regex GetGeneratedRegex();
+
         protected override CurlyCloseNode CreateNode(string Value) {
             return new CurlyCloseNode() { Value = Value, };
         }
     }
 
-    internal sealed class CommaParser() : RegexParser<CommaNode>(@",") {
+    internal sealed partial class CommaParser() : RegexParser<CommaNode>(GetGeneratedRegex()) {
+
+        [GeneratedRegex(@",", RegexOptions.IgnoreCase)]
+        private static partial Regex GetGeneratedRegex();
+
         protected override CommaNode CreateNode(string Value) {
             return new CommaNode() { Value = Value, };
         }
     }
 
-    internal sealed class QuoteParser() : RegexParser<QuoteNode>(@"""") {
+    internal sealed partial class QuoteParser() : RegexParser<QuoteNode>(GetGeneratedRegex()) {
+
+        [GeneratedRegex(@"""", RegexOptions.IgnoreCase)]
+        private static partial Regex GetGeneratedRegex();
+
         protected override QuoteNode CreateNode(string Value) {
             return new QuoteNode() { Value = Value, };
         }
     }
 
-    internal sealed class ProducesParser() : RegexParser<ProducesNode>("=>") {
+    internal sealed partial class ProducesParser() : RegexParser<ProducesNode>(GetGeneratedRegex()) {
+
+        [GeneratedRegex("=>", RegexOptions.IgnoreCase)]
+        private static partial Regex GetGeneratedRegex();
+
         protected override ProducesNode CreateNode(string Value) {
             return new ProducesNode() { Value = Value, };
         }
     }
 
-    internal sealed class ShortStringParser() : RegexParser<ShortStringNode>(@"\w+") {
+    internal sealed partial class ShortStringParser() : RegexParser<ShortStringNode>(GetGeneratedRegex()) {
+
+        [GeneratedRegex(@"\w+", RegexOptions.IgnoreCase)]
+        private static partial Regex GetGeneratedRegex();
+
         protected override ShortStringNode CreateNode(string Value) {
             return new ShortStringNode() { Value = Value, };
         }
     }
 
-    internal sealed class LongStringParser() : RegexParser<LongStringNode>(@"(\\""|[^""])*") {
+    internal sealed partial class LongStringParser() : RegexParser<LongStringNode>(GetGeneratedRegex()) {
+
+        [GeneratedRegex(@"(\\""|[^""])*", RegexOptions.IgnoreCase)]
+        private static partial Regex GetGeneratedRegex();
+
         protected override LongStringNode CreateNode(string Value) {
             return new LongStringNode() { Value = Value, };
         }

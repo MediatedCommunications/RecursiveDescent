@@ -16,7 +16,7 @@ namespace RecursiveDescent.Parsers {
             var ret = this.DefaultResult(Context0);
 
 
-            foreach(var Parser in Parsers) {
+            foreach (var Parser in Parsers) {
                 if (ret.Success is null
                     && Parser.TryParse(Context0) is { Success: { }, } Success
                     ) {

@@ -11,7 +11,7 @@ namespace RecursiveDescent.Parsers {
         public static ParserResult<TNode> MoveNext<TNode>(this ReadOnlySpan<char> This, TNode Node, int Length) where TNode : Node {
             var ret = new ParserResult<TNode>() {
                 Success = Node,
-                Context = This[Length ..],
+                Context = This[Length..],
             };
             return ret;
         }

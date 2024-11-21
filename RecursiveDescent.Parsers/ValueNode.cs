@@ -118,7 +118,7 @@
                 Value2 = Value2,
                 Value3 = Value3,
                 Value4 = Value4,
-                Value5 = Value5,    
+                Value5 = Value5,
                 Value6 = Value6,
                 Value7 = Value7,
                 Value8 = Value8,
@@ -132,8 +132,7 @@
 
     public record ValueNode : Node { }
 
-    public record ValueNode<TNode1> : Node
-        {
+    public record ValueNode<TNode1> : Node {
 
         public required TNode1 Value { get; init; }
 

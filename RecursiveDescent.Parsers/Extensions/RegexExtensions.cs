@@ -7,7 +7,7 @@ namespace RecursiveDescent.Parsers {
             Value = default;
 
             var IE = This.EnumerateMatches(Input);
-            
+
             if (IE.MoveNext()) {
                 ret = true;
                 Value = IE.Current;

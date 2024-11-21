@@ -15,7 +15,7 @@ namespace RecursiveDescent.Parsers {
 
         public override ParserResult<TNode> TryParse(ReadOnlySpan<char> Context0) {
             var ret = this.DefaultResult(Context0);
-            
+
 
             if (RX.Match(Context0, out var Match) && CreateNode(Context0, Match) is { } Node) {
                 ret = Context0.MoveNext(Node, Match);
@@ -31,7 +31,7 @@ namespace RecursiveDescent.Parsers {
         }
 
         protected abstract TNode CreateNode(string Value);
-        
+
     }
 
 }

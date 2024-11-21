@@ -16,7 +16,7 @@ namespace RecursiveDescent.Parsers.HStore {
         public static RuleParser Rule { get; } = new();
         public static AnyStringParser AnyString { get; } = new();
 
-        
+
     }
 
 

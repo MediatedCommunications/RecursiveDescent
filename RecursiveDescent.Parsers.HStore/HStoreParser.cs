@@ -4,7 +4,7 @@
         public static List<KeyValuePair<string, string>>? TryParse(ReadOnlySpan<char> Input) {
             var ret = default(List<KeyValuePair<string, string>>);
 
-            if(Parsers.Root.TryParse(Input).Success is { } Result) {
+            if (Parsers.Root.TryParse(Input).Success is { } Result) {
                 ret = [];
 
                 var Rules = Result.Rules;

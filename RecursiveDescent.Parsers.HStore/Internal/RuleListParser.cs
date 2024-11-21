@@ -6,12 +6,12 @@
             var ret = this.DefaultResult(Context0);
 
             {
-                
 
 
-                if(ret.Success is null && Grammars.RuleListParser.TryParse(Context0) is {
+
+                if (ret.Success is null && Grammars.RuleListParser.TryParse(Context0) is {
                     Context: var Context1,
-                    Success: { 
+                    Success: {
                         Value1: { } Rule,
                         Value2: var More,
                     }
@@ -33,7 +33,7 @@
 
             {
                 if (ret.Success is null
-                    
+
                     && Parsers.Rule.AsWord().TryParse(Context0) is { Success: { } Rule, Context: var Context1 }
 
                     && Parsers.Comma.AsWord().TryParse(Context1) is { Success: { }, Context: var Context2 }

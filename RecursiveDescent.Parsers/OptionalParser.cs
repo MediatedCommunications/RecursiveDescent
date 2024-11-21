@@ -28,7 +28,7 @@ namespace RecursiveDescent.Parsers {
             }
 
             {
-                if(ret.Success is null) {
+                if (ret.Success is null) {
                     ret = new() {
                         Context = Context0,
                         Success = new() { Value = default, }

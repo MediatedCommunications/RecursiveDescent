@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-
-namespace RecursiveDescent.Parsers.HStore {
+﻿namespace RecursiveDescent.Parsers.HStore {
     internal class AnyStringParser : Parser<AnyStringNode> {
 
         private static string DecodeValue(string Input) {

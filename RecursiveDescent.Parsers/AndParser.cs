@@ -1,9 +1,8 @@
 ﻿namespace RecursiveDescent.Parsers {
 
     public readonly struct AndParser<TNode1, TNode2> : IParser<ValueNode<TNode1, TNode2>>
-        where TNode1 : Node 
-        where TNode2 : Node
-        {
+        where TNode1 : Node
+        where TNode2 : Node {
 
         public required IParser<TNode1> Parser1 { get; init; }
         public required IParser<TNode2> Parser2 { get; init; }
@@ -274,8 +273,7 @@
         where TNode5 : Node
         where TNode6 : Node
         where TNode7 : Node
-        where TNode8 : Node 
-        {
+        where TNode8 : Node {
 
         public required IParser<TNode1> Parser1 { get; init; }
         public required IParser<TNode2> Parser2 { get; init; }

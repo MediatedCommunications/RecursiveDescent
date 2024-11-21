@@ -4,9 +4,9 @@
 
         public override ParserResult<RuleNode> TryParse(ReadOnlySpan<char> Context0) {
             var ret = this.DefaultResult(Context0);
-            
+
             {
-                if (ret.Success is null && Grammars.RuleParser.TryParse(Context0) is { 
+                if (ret.Success is null && Grammars.RuleParser.TryParse(Context0) is {
                     Context: var Context1,
                     Success: (var Name, var Value)
                 }) {

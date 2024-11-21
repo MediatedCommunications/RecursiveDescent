@@ -3,9 +3,8 @@
 namespace RecursiveDescent.Parsers {
 
     public readonly struct TransformParser<TInput, TOutput> : IParser<TOutput>
-        where TInput : Node 
-        where TOutput : Node
-        {
+        where TInput : Node
+        where TOutput : Node {
 
         public TransformParser(IParser<TInput> Input, Func<TInput, TOutput> Transform) {
             this.Input = Input;
@@ -13,7 +12,7 @@ namespace RecursiveDescent.Parsers {
         }
 
         public IParser<TInput> Input { get; }
-        public Func<TInput, TOutput> Transform { get; }  
+        public Func<TInput, TOutput> Transform { get; }
 
         public ParserResult<TOutput> TryParse(ReadOnlySpan<char> Context0) {
             var ret = this.DefaultResult(Context0);

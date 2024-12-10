@@ -3,6 +3,15 @@ using RecursiveDescent.Parsers.HStore;
 namespace RecursiveDescent.Parsers.HStore_Tests_ {
     [TestClass]
     public class UnitTest1 {
+
+        [TestMethod]
+        public void BiggerTest() {
+            var Input = """"  {"date_to"=>"03/03/2019", "date_from"=>"03/03/2019", "occupation"=>"Homemaker ", "current_employer"=>"true"} """";
+            var ret = HStoreParser.TryParse(Input)?.ToDictionary();
+
+            Assert.IsNotNull(ret);
+        }
+
         [TestMethod]
         public void SimpleTest() {
             var Input = """"  {"key1"=>"value1",    key2    =>    value2   }  """";
@@ -78,7 +87,11 @@ namespace RecursiveDescent.Parsers.HStore_Tests_ {
 
         [TestMethod]
         public void SqlTest() {
-            var C = new Microsoft.Data.SqlClient.SqlConnection("Server=(local);Database=LEGACY_Docketwise_TestDb4;TrustServerCertificate=True;Integrated Security=true;");
+
+            var DbName = "LEGACY_Docketwise_TestDb4";
+            DbName = "Docketwise-12-9-24-Panchal";
+
+            var C = new Microsoft.Data.SqlClient.SqlConnection($@"Server=(local);Database={DbName};TrustServerCertificate=True;Integrated Security=true;");
             C.Open();
 
             var Queries = new List<string>() {

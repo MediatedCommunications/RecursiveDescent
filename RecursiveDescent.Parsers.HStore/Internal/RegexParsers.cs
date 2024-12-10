@@ -4,7 +4,7 @@ namespace RecursiveDescent.Parsers.HStore {
 
     internal sealed partial class CurlyOpenParser() : RegexParser<CurlyOpenNode>(GetGeneratedRegex()) {
 
-        [GeneratedRegex(@"{", RegexOptions.IgnoreCase)]
+        [GeneratedRegex(@"^{", RegexOptions.IgnoreCase)]
         private static partial Regex GetGeneratedRegex();
 
         protected override CurlyOpenNode CreateNode(string Value) {
@@ -14,7 +14,7 @@ namespace RecursiveDescent.Parsers.HStore {
 
     internal sealed partial class CurlyCloseParser() : RegexParser<CurlyCloseNode>(GetGeneratedRegex()) {
 
-        [GeneratedRegex(@"}", RegexOptions.IgnoreCase)]
+        [GeneratedRegex(@"^}", RegexOptions.IgnoreCase)]
         private static partial Regex GetGeneratedRegex();
 
         protected override CurlyCloseNode CreateNode(string Value) {
@@ -24,7 +24,7 @@ namespace RecursiveDescent.Parsers.HStore {
 
     internal sealed partial class CommaParser() : RegexParser<CommaNode>(GetGeneratedRegex()) {
 
-        [GeneratedRegex(@",", RegexOptions.IgnoreCase)]
+        [GeneratedRegex(@"^,", RegexOptions.IgnoreCase)]
         private static partial Regex GetGeneratedRegex();
 
         protected override CommaNode CreateNode(string Value) {
@@ -34,7 +34,7 @@ namespace RecursiveDescent.Parsers.HStore {
 
     internal sealed partial class QuoteParser() : RegexParser<QuoteNode>(GetGeneratedRegex()) {
 
-        [GeneratedRegex(@"""", RegexOptions.IgnoreCase)]
+        [GeneratedRegex(@"^""", RegexOptions.IgnoreCase)]
         private static partial Regex GetGeneratedRegex();
 
         protected override QuoteNode CreateNode(string Value) {
@@ -44,7 +44,7 @@ namespace RecursiveDescent.Parsers.HStore {
 
     internal sealed partial class ProducesParser() : RegexParser<ProducesNode>(GetGeneratedRegex()) {
 
-        [GeneratedRegex("=>", RegexOptions.IgnoreCase)]
+        [GeneratedRegex(@"^=>", RegexOptions.IgnoreCase)]
         private static partial Regex GetGeneratedRegex();
 
         protected override ProducesNode CreateNode(string Value) {
@@ -54,7 +54,7 @@ namespace RecursiveDescent.Parsers.HStore {
 
     internal sealed partial class ShortStringParser() : RegexParser<ShortStringNode>(GetGeneratedRegex()) {
 
-        [GeneratedRegex(@"\w+", RegexOptions.IgnoreCase)]
+        [GeneratedRegex(@"^\w+", RegexOptions.IgnoreCase)]
         private static partial Regex GetGeneratedRegex();
 
         protected override ShortStringNode CreateNode(string Value) {
@@ -64,7 +64,7 @@ namespace RecursiveDescent.Parsers.HStore {
 
     internal sealed partial class LongStringParser() : RegexParser<LongStringNode>(GetGeneratedRegex()) {
 
-        [GeneratedRegex(@"(\\""|[^""])*", RegexOptions.IgnoreCase)]
+        [GeneratedRegex(@"^(\\""|[^""])*", RegexOptions.IgnoreCase)]
         private static partial Regex GetGeneratedRegex();
 
         protected override LongStringNode CreateNode(string Value) {

@@ -1,3 +1,2 @@
-﻿namespace RecursiveDescent.Parsers {
-    public record WhiteSpaceNode : RegexNode { }
-}
+﻿namespace RecursiveDescent.Parsers; 
+public record WhiteSpaceNode : RegexNode { }

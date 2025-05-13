@@ -1,5 +1,4 @@
-﻿namespace RecursiveDescent.Parsers {
-    public record Node {
+﻿namespace RecursiveDescent.Parsers; 
+public record Node {
 
-    }
 }

@@ -7,13 +7,9 @@ public static class HStoreParser {
         if (Parsers.Root.TryParse(Input).Success is { } Result) {
             ret = [];
 
-            var Rules = Result.Rules;
-            while (Rules is { }) {
-                if (Rules.Rule is { } Rule) {
-                    var Value = KeyValuePair.Create(Rule.Name.Value, Rule.Value.Value);
-                    ret.Add(Value);
-                }
-                Rules = Rules.More;
+            foreach(var Rule in Result.Rules) {
+                var tret = KeyValuePair.Create(Rule.Name.Value, Rule.Value.Value);
+                ret.Add(tret);
             }
 
         }

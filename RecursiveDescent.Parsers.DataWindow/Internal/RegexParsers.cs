@@ -1,40 +1,30 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace RecursiveDescent.Parsers.HStore; 
+namespace RecursiveDescent.Parsers.DataWindow; 
 
-internal sealed partial class CurlyOpenParser() : RegexParser<CurlyOpenNode>(GetGeneratedRegex()) {
+internal sealed partial class ParenOpenParser() : RegexParser<ParenOpenNode>(GetGeneratedRegex()) {
 
-    [GeneratedRegex(@"^{", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^\(", RegexOptions.IgnoreCase)]
     private static partial Regex GetGeneratedRegex();
 
-    protected override CurlyOpenNode CreateNode(string Value) {
-        return new CurlyOpenNode() { Value = Value, };
+    protected override ParenOpenNode CreateNode(string Value) {
+        return new ParenOpenNode() { Value = Value, };
     }
 }
 
-internal sealed partial class CurlyCloseParser() : RegexParser<CurlyCloseNode>(GetGeneratedRegex()) {
+internal sealed partial class ParenCloseParser() : RegexParser<ParenCloseNode>(GetGeneratedRegex()) {
 
-    [GeneratedRegex(@"^}", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^\)", RegexOptions.IgnoreCase)]
     private static partial Regex GetGeneratedRegex();
 
-    protected override CurlyCloseNode CreateNode(string Value) {
-        return new CurlyCloseNode() { Value = Value, };
-    }
-}
-
-internal sealed partial class CommaParser() : RegexParser<CommaNode>(GetGeneratedRegex()) {
-
-    [GeneratedRegex(@"^,", RegexOptions.IgnoreCase)]
-    private static partial Regex GetGeneratedRegex();
-
-    protected override CommaNode CreateNode(string Value) {
-        return new CommaNode() { Value = Value, };
+    protected override ParenCloseNode CreateNode(string Value) {
+        return new ParenCloseNode() { Value = Value, };
     }
 }
 
 internal sealed partial class QuoteParser() : RegexParser<QuoteNode>(GetGeneratedRegex()) {
 
-    [GeneratedRegex(@"^""", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^\""", RegexOptions.IgnoreCase)]
     private static partial Regex GetGeneratedRegex();
 
     protected override QuoteNode CreateNode(string Value) {
@@ -44,7 +34,7 @@ internal sealed partial class QuoteParser() : RegexParser<QuoteNode>(GetGenerate
 
 internal sealed partial class ProducesParser() : RegexParser<ProducesNode>(GetGeneratedRegex()) {
 
-    [GeneratedRegex(@"^=>", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^=", RegexOptions.IgnoreCase)]
     private static partial Regex GetGeneratedRegex();
 
     protected override ProducesNode CreateNode(string Value) {
@@ -54,7 +44,7 @@ internal sealed partial class ProducesParser() : RegexParser<ProducesNode>(GetGe
 
 internal sealed partial class ShortStringParser() : RegexParser<ShortStringNode>(GetGeneratedRegex()) {
 
-    [GeneratedRegex(@"^(\w)+", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^(\w|\.)+", RegexOptions.IgnoreCase)]
     private static partial Regex GetGeneratedRegex();
 
     protected override ShortStringNode CreateNode(string Value) {
@@ -64,7 +54,8 @@ internal sealed partial class ShortStringParser() : RegexParser<ShortStringNode>
 
 internal sealed partial class LongStringParser() : RegexParser<LongStringNode>(GetGeneratedRegex()) {
 
-    [GeneratedRegex(@"^(\\""|[^""])*", RegexOptions.IgnoreCase)]
+    //This shoud match anything except for the terminal quote \"
+    [GeneratedRegex(@"^(.*?)(?=\"")", RegexOptions.IgnoreCase)]
     private static partial Regex GetGeneratedRegex();
 
     protected override LongStringNode CreateNode(string Value) {

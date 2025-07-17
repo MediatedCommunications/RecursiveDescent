@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursiveDescent.Parsers.HS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursiveDescent.Parsers.HStore(Tests)", "RecursiveDescent.Parsers.HStore(Tests)\RecursiveDescent.Parsers.HStore(Tests).csproj", "{975F83BC-2FB4-4435-A10E-0B441EE9E519}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursiveDescent.Parsers.DataWindow", "RecursiveDescent.Parsers.DataWindow\RecursiveDescent.Parsers.DataWindow.csproj", "{FEB3D18C-EAE4-47D7-974D-CC09B2949983}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursiveDescent.Parsers.DataWindow(Tests)", "RecursiveDescent.Parsers.DataWindow(Tests)\RecursiveDescent.Parsers.DataWindow(Tests).csproj", "{5E0E57FC-A1C1-4F81-8965-381B8A48507A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{975F83BC-2FB4-4435-A10E-0B441EE9E519}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{975F83BC-2FB4-4435-A10E-0B441EE9E519}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{975F83BC-2FB4-4435-A10E-0B441EE9E519}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEB3D18C-EAE4-47D7-974D-CC09B2949983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEB3D18C-EAE4-47D7-974D-CC09B2949983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEB3D18C-EAE4-47D7-974D-CC09B2949983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEB3D18C-EAE4-47D7-974D-CC09B2949983}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E0E57FC-A1C1-4F81-8965-381B8A48507A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E0E57FC-A1C1-4F81-8965-381B8A48507A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E0E57FC-A1C1-4F81-8965-381B8A48507A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E0E57FC-A1C1-4F81-8965-381B8A48507A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

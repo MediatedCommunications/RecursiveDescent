@@ -1,6 +1,6 @@
 using RecursiveDescent.Parsers.HStore;
 
-namespace RecursiveDescent.Parsers.HStore_Tests_; 
+namespace RecursiveDescent.Parsers.HStore.Tests; 
 [TestClass]
 public class UnitTest1 {
 

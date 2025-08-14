@@ -1,6 +1,6 @@
 using RecursiveDescent.Parsers.DataWindow;
 
-namespace RecursiveDescent.Parsers.DataWindow_Tests_; 
+namespace RecursiveDescent.Parsers.DataWindow.Tests; 
 [TestClass]
 public class UnitTest1 {
 

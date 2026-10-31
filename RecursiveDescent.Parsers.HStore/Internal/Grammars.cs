@@ -1,7 +1,6 @@
 ﻿namespace RecursiveDescent.Parsers.HStore; 
 internal static class Grammars {
     public static IParser<ValueNode<AnyStringNode, AnyStringNode>> RuleParser { get; }
-    public static IParser<ValueNode<RuleNode, RuleListNode>> RuleListParser { get; }
     public static IParser<RuleListNode> RootParserRules { get; }
 
     static Grammars() {
@@ -11,28 +10,25 @@ internal static class Grammars {
             Parsers.AnyString.AsWord()
         ).Transform(x => ValueNodes.Create(x.Value1, x.Value3));
 
-        RuleListParser = Primitives.And(
-            Parsers.Rule.AsWord(),
-            Primitives.Optional(
-                Primitives.And(
-                    Parsers.Comma.AsWord(),
-                    Parsers.RuleList.AsWord()
-                )
-            )
-        ).Transform(x => ValueNodes.Create(x.Value1, x.Value2.Value?.Value2));
+        var rulesInBraces = Primitives.And(
+            Parsers.CurlyOpen.AsWord(),
+            Parsers.RuleList.AsWord(),
+            Parsers.CurlyClose.AsWord()
+        ).Transform(x => x.Value2);
 
-        {
-            RootParserRules = Primitives.Or([
-                Parsers.RuleList.AsWord(),
+        var emptyBraces = Primitives.And(
+            Parsers.CurlyOpen.AsWord(),
+            Parsers.CurlyClose.AsWord()
+        ).Transform(static _ => new RuleListNode {
+            Rule = null,
+            More = null,
+        });
 
-                Primitives.And(
-                    Parsers.CurlyOpen.AsWord(),
-                    Parsers.RuleList.AsWord(),
-                    Parsers.CurlyClose.AsWord()
-                    ).Transform(x => x.Value2),
-            ]);
-
-        }
+        RootParserRules = Primitives.Or([
+            Parsers.RuleList.AsWord(),
+            rulesInBraces,
+            emptyBraces,
+        ]);
 
     }
 }

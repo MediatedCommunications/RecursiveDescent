@@ -1,80 +1,45 @@
-﻿namespace RecursiveDescent.Parsers.HStore; 
+﻿namespace RecursiveDescent.Parsers.HStore;
 
 internal sealed class RuleListParser : Parser<RuleListNode> {
+
+    private static class Words {
+        public static IParser<RuleNode> Rule { get; } = Parsers.Rule.AsWord();
+        public static IParser<CommaNode> Comma { get; } = Parsers.Comma.AsWord();
+    }
 
     public override ParserResult<RuleListNode> TryParse(ReadOnlySpan<char> Context0) {
         var ret = this.DefaultResult(Context0);
 
-        {
-
-
-
-            if (ret.Success is null && Grammars.RuleListParser.TryParse(Context0) is {
-                Context: var Context1,
-                Success: {
-                    Value1: { } Rule,
-                    Value2: var More,
-                }
-            }) {
-
-                ret = new() {
-                    Context = Context1,
-                    Success = new() {
-                        Rule = Rule,
-                        More = More,
-                    },
-                };
-
-            }
-
+        if (Words.Rule.TryParse(Context0) is not { Success: { } First, Context: var Context }) {
+            return ret;
         }
+
+        var rules = new List<RuleNode> { First };
+
+        while (Words.Comma.TryParse(Context) is { Success: { }, Context: var AfterComma }
+            && Words.Rule.TryParse(AfterComma) is { Success: { } Next, Context: var AfterRule }) {
+            rules.Add(Next);
+            Context = AfterRule;
+        }
+
+        var head = new RuleListNode {
+            Rule = rules[^1],
+            More = null,
+        };
+
+        for (var i = rules.Count - 2; i >= 0; i--) {
+            head = new RuleListNode {
+                Rule = rules[i],
+                More = head,
+            };
+        }
+
+        ret = new() {
+            Context = Context,
+            Success = head,
+        };
 
         return ret;
-
-        {
-            if (ret.Success is null
-
-                && Parsers.Rule.AsWord().TryParse(Context0) is { Success: { } Rule, Context: var Context1 }
-
-                && Parsers.Comma.AsWord().TryParse(Context1) is { Success: { }, Context: var Context2 }
-
-                && Parsers.RuleList.AsWord().TryParse(Context2) is { Success: { } More, Context: var Context3 }
-
-                ) {
-
-                ret = new() {
-                    Context = Context3,
-                    Success = new() {
-                        Rule = Rule,
-                        More = More,
-                    },
-                };
-
-            }
-
-        }
-
-        {
-            if (ret.Success is null
-
-                && Parsers.Rule.AsWord().TryParse(Context0) is { Success: { } Rule, Context: var Context1 }
-
-                ) {
-
-                ret = new() {
-                    Context = Context1,
-                    Success = new() {
-                        Rule = Rule,
-                        More = default,
-                    },
-                };
-
-            }
-
-        }
-
-        return ret;
-
     }
 
 }

@@ -64,7 +64,8 @@ internal sealed partial class ShortStringParser() : RegexParser<ShortStringNode>
 
 internal sealed partial class LongStringParser() : RegexParser<LongStringNode>(GetGeneratedRegex) {
 
-    [GeneratedRegex(@"^(\\""|[^""])*", RegexOptions.IgnoreCase)]
+    // A backslash escapes the next character, so the closing quote stays outside the value.
+    [GeneratedRegex(@"^(?:\\[\s\S]|[^""\\])*", RegexOptions.IgnoreCase)]
     private static partial Regex GetGeneratedRegex { get; }
 
     protected override LongStringNode CreateNode(string Value) {

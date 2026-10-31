@@ -44,18 +44,71 @@ public class UnitTest1 {
     }
 
     [TestMethod]
-    public void UnclosedEmptyString() {
-
+    public void UnclosedQuote() {
         var Input = """"  { "Unclosed" => " }  """";
 
-        var ret = HStoreParser.TryParse(Input)?.ToDictionary();
+        Assert.IsNull(HStoreParser.TryParse(Input));
+    }
+
+    [TestMethod]
+    public void RejectsIncompleteInput() {
+        Assert.IsNull(HStoreParser.TryParse("!!!"));
+        Assert.IsNull(HStoreParser.TryParse("\"key1\"=>\"value1\" junk"));
+        Assert.IsNull(HStoreParser.TryParse("\"key1\"=>\"value1\" \"key2\"=>\"value2\""));
+        Assert.IsNull(HStoreParser.TryParse("\"key1\"=>\"value1\","));
+        Assert.IsNull(HStoreParser.TryParse("{ \"key1\"=>\"value1\", }"));
+        Assert.IsNull(HStoreParser.TryParse("{"));
+    }
+
+    [TestMethod]
+    public void TrailingBackslash() {
+        var ret = HStoreParser.TryParse("""{"k"=>"a\\", "path"=>"C:\\", "two"=>"a\\\\"}""")?.ToDictionary();
 
         Assert.IsNotNull(ret);
+        Assert.AreEqual("a\\", ret["k"]);
+        Assert.AreEqual("C:\\", ret["path"]);
+        Assert.AreEqual("a\\\\", ret["two"]);
+    }
 
-        ret.TryGetValue("Unclosed", out var value1);
+    [TestMethod]
+    public void EscapedQuote() {
+        var ret = HStoreParser.TryParse("""{"k"=>"a\"b"}""")?.ToDictionary();
 
-        Assert.AreEqual("Quote", string.Empty);
+        Assert.IsNotNull(ret);
+        Assert.AreEqual("a\"b", ret["k"]);
+    }
 
+    [TestMethod]
+    public void QuotedEmptyValue() {
+        var ret = HStoreParser.TryParse("""{"a"=>""}""")?.ToDictionary();
+
+        Assert.IsNotNull(ret);
+        Assert.AreEqual(string.Empty, ret["a"]);
+    }
+
+    [TestMethod]
+    public void NullWord() {
+        var quoted = HStoreParser.TryParse("""{"a"=>NULL, "b"=>"x"}""")?.ToDictionary();
+        var bare = HStoreParser.TryParse("""a=>null""")?.ToDictionary();
+
+        Assert.IsNotNull(quoted);
+        Assert.AreEqual("NULL", quoted["a"]);
+        Assert.AreEqual("x", quoted["b"]);
+        Assert.IsNotNull(bare);
+        Assert.AreEqual("null", bare["a"]);
+    }
+
+    [TestMethod]
+    public void LongList() {
+        var input = string.Join(", ", Enumerable.Range(0, 1000).Select(i => $"k{i}=>v{i}"));
+        var ret = HStoreParser.TryParse(input);
+
+        Assert.IsNotNull(ret);
+        Assert.AreEqual(1000, ret.Count);
+        Assert.AreEqual("k0", ret[0].Key);
+        Assert.AreEqual("v0", ret[0].Value);
+        Assert.AreEqual("k999", ret[^1].Key);
+        Assert.AreEqual("v999", ret[^1].Value);
     }
 
     [TestMethod]

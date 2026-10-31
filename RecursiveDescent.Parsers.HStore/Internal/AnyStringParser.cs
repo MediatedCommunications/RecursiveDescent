@@ -60,25 +60,6 @@ internal class AnyStringParser : Parser<AnyStringNode> {
 
         }
 
-        {
-            if (ret.Success is null
-
-                && Parsers.Quote.AsWord().TryParse(Context0) is { Success: { } Value, Context: var Context1 } V1
-
-                ) {
-
-
-                ret = new() {
-                    Context = Context1,
-                    Success = new() {
-                        Value = string.Empty,
-                    },
-                };
-
-            }
-
-        }
-
         return ret;
 
     }
